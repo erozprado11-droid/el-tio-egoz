@@ -59,10 +59,10 @@ export default function Dashboard({ filters }: { filters: { order: string } }) {
 		}
 	}
 
-	if (loading) return <p className='mx-auto text-center'>Cargando...</p>;
+	if (loading) return <p className='mx-auto text-center'>Cargando lujurias... ❤</p>;
 
 	return (
-		<div className='max-w-7xl 2xl:max-w-screen-2xl mx-auto px-1 sm:px-4 py-3 sm:py-6'>
+		<div className='max-w-7xl 2xl:max-w-screen-2xl mx-auto px-5 sm:px-10 py-5 sm:py-10'>
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 sm:gap-4 xl:gap-6'>
 				{filteredGames.map((item) => (
 					<div
@@ -72,7 +72,7 @@ export default function Dashboard({ filters }: { filters: { order: string } }) {
 					>
 						<ImageSlider
 							images={item.images}
-							height='h-32 sm:h-56 md:h-64 lg:h-72'
+							height='h-52 sm:h-56 md:h-64 lg:h-72'
 						/>
 						<Link
 							href={`/game/${item.id}`}

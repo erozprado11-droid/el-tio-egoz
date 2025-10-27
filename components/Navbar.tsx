@@ -159,16 +159,16 @@ function Navbar() {
 						</li>
 						<li>
 							<Link
-								href='#'
+								href='/Donate'
 								className='hover:underline'
+								rel='noopener noreferrer'
 							>
-								Nosotros
+								Donar
 							</Link>
 						</li>
 						<li>
 							<a
-								href='https://directorio-de-enlaces-nuevo-v3.netlify.app/'
-								target='_blank'
+								href='/social-networks'
 								rel='noopener noreferrer'
 								className='hover:underline'
 							>
@@ -177,8 +177,9 @@ function Navbar() {
 						</li>
 						<li>
 							<Link
-								href='#'
+								href='/contact'
 								className='hover:underline'
+								rel='noopener noreferrer'
 							>
 								Contáctanos
 							</Link>
