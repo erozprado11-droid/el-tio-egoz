@@ -5,6 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearch } from '@/context/SearchContext';
 
+// Array único de enlaces para navbar y sidebar
+const navLinks = [
+	{ label: 'Inicio', href: '/' },
+	{ label: 'Donar', href: '/Donate' },
+	{ label: 'Redes', href: '/social-networks', external: false },
+	{ label: 'Contáctanos', href: '/contact' },
+];
+
 function Navbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const { query, setQuery } = useSearch();
@@ -72,39 +80,27 @@ function Navbar() {
 
 				{/* Menú horizontal en desktop */}
 				<ul className='hidden lg:flex flex-row gap-6 items-center text-white ml-4'>
-					<li>
-						<Link
-							href='/'
-							className='hover:underline'
-						>
-							Inicio
-						</Link>
-					</li>
-					<li>
-						<Link
-							href='/Donate'
-							className='hover:underline'
-						>
-							Donar
-						</Link>
-					</li>
-					<li>
-						<a
-							href='/social-networks'
-							rel='noopener noreferrer'
-							className='hover:underline'
-						>
-							Redes
-						</a>
-					</li>
-					<li>
-						<Link
-							href='/contact'
-							className='hover:underline'
-						>
-							Contáctanos
-						</Link>
-					</li>
+					{navLinks.map((link, idx) =>
+						link.external ? (
+							<a
+								key={idx}
+								href={link.href}
+								rel='noopener noreferrer'
+								className='hover:underline'
+							>
+								{link.label}
+							</a>
+						) : (
+							<li key={idx}>
+								<Link
+									href={link.href}
+									className='hover:underline'
+								>
+									{link.label}
+								</Link>
+							</li>
+						)
+					)}
 				</ul>
 
 				{/* Toggle menu button for mobile */}
@@ -184,6 +180,27 @@ function Navbar() {
 								Contáctanos
 							</Link>
 						</li>
+						{navLinks.map((link, idx) =>
+							link.external ? (
+								<a
+									key={idx}
+									href={link.href}
+									rel='noopener noreferrer'
+									className='hover:underline block'
+								>
+									{link.label}
+								</a>
+							) : (
+								<li key={idx}>
+									<Link
+										href={link.href}
+										className='hover:underline block'
+									>
+										{link.label}
+									</Link>
+								</li>
+							)
+						)}
 					</ul>
 				</aside>
 			</div>

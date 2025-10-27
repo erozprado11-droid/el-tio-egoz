@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Dashboard from '@/components/Dashboard';
 import Hero from '@/components/Hero';
 import SidebarFilters from '@/components/SidebarFilters';
@@ -9,6 +9,26 @@ export default function Home() {
 		order: 'newest',
 	});
 	const [showFilters, setShowFilters] = useState(false);
+	const currentBuildId = useRef<string | null>(null);
+
+	useEffect(() => {
+		async function checkVersion() {
+			try {
+				const res = await fetch('/api/version');
+				const { buildId } = await res.json();
+				if (!currentBuildId.current) {
+					currentBuildId.current = buildId;
+				} else if (currentBuildId.current !== buildId) {
+					// Nueva versión detectada, recarga la página
+					window.location.reload();
+				}
+			} catch {
+				// Ignorar errores de red
+			}
+		}
+		const interval = setInterval(checkVersion, 60000); // cada 60 segundos
+		return () => clearInterval(interval);
+	}, []);
 
 	return (
 		<div className='flex flex-col'>
