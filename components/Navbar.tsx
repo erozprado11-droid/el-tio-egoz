@@ -5,32 +5,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearch } from '@/context/SearchContext';
 
-// Array único de enlaces para navbar y sidebar
+// Reemplazado: navLinks con propiedad `external` explicitada y uso único en todo el componente
 const navLinks = [
-	{ label: 'Inicio', href: '/' },
-	{ label: 'Donar', href: '/Donate' },
+	{ label: 'Inicio', href: '/', external: false },
+	{ label: 'Donar', href: '/Donate', external: false },
 	{ label: 'Redes', href: '/social-networks', external: false },
-	{ label: 'Contáctanos', href: '/contact' },
+	{ label: 'Contáctanos', href: '/contact', external: false },
 ];
 
 function Navbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const { query, setQuery } = useSearch();
 
-	// Toggle menu visibility on small screens
-	const toggleMenu = () => {
-		setIsMenuOpen(!isMenuOpen);
-	};
-
-	// Close menu when clicking outside of it
-	const closeMenu = () => {
-		setIsMenuOpen(false);
-	};
+	const toggleMenu = () => setIsMenuOpen((v) => !v);
+	const closeMenu = () => setIsMenuOpen(false);
 
 	return (
 		<div className='w-full bg-card'>
 			<nav className='flex flex-row justify-between items-center px-4 py-2'>
-				<div className=''>
+				<div>
 					<Link
 						href='/'
 						className='flex items-center gap-2 text-white'
@@ -38,13 +31,12 @@ function Navbar() {
 						<Image
 							src='/images/logo.webp'
 							alt='logo el tio egoz'
-							width={40} // tamaño base reducido
+							width={40}
 							height={40}
 							className='rounded-full sm:w-10 sm:h-10 w-8 h-8'
 						/>
 						<span className='sm:text-2xl text-lg font-semibold'>
 							<span className='sm:inline hidden text-nowrap'>El Tío Egoz</span>
-							<span className='inline sm:hidden text-nowrap'>Tío Egoz</span>
 						</span>
 					</Link>
 				</div>
@@ -80,27 +72,27 @@ function Navbar() {
 
 				{/* Menú horizontal en desktop */}
 				<ul className='hidden lg:flex flex-row gap-6 items-center text-white ml-4'>
-					{navLinks.map((link, idx) =>
-						link.external ? (
-							<a
-								key={idx}
-								href={link.href}
-								rel='noopener noreferrer'
-								className='hover:underline'
-							>
-								{link.label}
-							</a>
-						) : (
-							<li key={idx}>
+					{navLinks.map((link, idx) => (
+						<li key={idx}>
+							{link.external ? (
+								<a
+									href={link.href}
+									target='_blank'
+									rel='noopener noreferrer'
+									className='hover:underline'
+								>
+									{link.label}
+								</a>
+							) : (
 								<Link
 									href={link.href}
 									className='hover:underline'
 								>
 									{link.label}
 								</Link>
-							</li>
-						)
-					)}
+							)}
+						</li>
+					))}
 				</ul>
 
 				{/* Toggle menu button for mobile */}
@@ -116,11 +108,8 @@ function Navbar() {
 			</nav>
 
 			{/* Sidebar Menu for Mobile */}
-			{/* Overlay */}
 			<div
-				className={`fixed inset-0 z-50 transition-all duration-300 ${
-					isMenuOpen ? 'block' : 'hidden'
-				}`}
+				className={`fixed inset-0 z-50 transition-all duration-300 ${isMenuOpen ? 'block' : 'hidden'}`}
 				style={{ pointerEvents: isMenuOpen ? 'auto' : 'none' }}
 			>
 				{/* Fondo oscuro */}
@@ -131,9 +120,7 @@ function Navbar() {
 				/>
 				{/* Sidebar */}
 				<aside
-					className={`fixed left-0 top-0 w-64 h-full bg-card text-white p-4 z-50 transform transition-transform duration-300 ${
-						isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-					}`}
+					className={`fixed left-0 top-0 w-64 h-full bg-card text-white p-4 z-50 transform transition-transform duration-300 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
 					style={{ boxShadow: '2px 0 8px rgba(0,0,0,0.2)' }}
 				>
 					{/* Botón de cerrar */}
@@ -144,63 +131,31 @@ function Navbar() {
 					>
 						&times;
 					</button>
+
 					<ul className='space-y-4 mt-10'>
-						<li>
-							<Link
-								href='/'
-								className='hover:underline'
-							>
-								Inicio
-							</Link>
-						</li>
-						<li>
-							<Link
-								href='/Donate'
-								className='hover:underline'
-								rel='noopener noreferrer'
-							>
-								Donar
-							</Link>
-						</li>
-						<li>
-							<a
-								href='/social-networks'
-								rel='noopener noreferrer'
-								className='hover:underline'
-							>
-								Redes
-							</a>
-						</li>
-						<li>
-							<Link
-								href='/contact'
-								className='hover:underline'
-								rel='noopener noreferrer'
-							>
-								Contáctanos
-							</Link>
-						</li>
-						{navLinks.map((link, idx) =>
-							link.external ? (
-								<a
-									key={idx}
-									href={link.href}
-									rel='noopener noreferrer'
-									className='hover:underline block'
-								>
-									{link.label}
-								</a>
-							) : (
-								<li key={idx}>
+						{navLinks.map((link, idx) => (
+							<li key={idx}>
+								{link.external ? (
+									<a
+										href={link.href}
+										target='_blank'
+										rel='noopener noreferrer'
+										className='hover:underline block'
+										onClick={closeMenu}
+									>
+										{link.label}
+									</a>
+								) : (
 									<Link
 										href={link.href}
 										className='hover:underline block'
+										onClick={closeMenu}
 									>
 										{link.label}
 									</Link>
-								</li>
-							)
-						)}
+								)}
+							</li>
+						))}
 					</ul>
 				</aside>
 			</div>
