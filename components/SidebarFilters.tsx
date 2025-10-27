@@ -54,8 +54,12 @@ export default function SidebarFilters({
 							className='accent-[#ffb300] mr-2'
 						/>
 						{opt.label}
-					</label>
-				))}
+					</label>  //Si lees esto mi idea para el apartado de Tags era algo asi
+							// Tenemos en la base de datos "Games" y este contiene "12" (creo) lineas
+							// en esas 12 lineas esta "details", yo queria extraer de ahí todas las "tags" pero no funcionó.
+							// Entonces la nueva idea es que si puedes crear una parte donde se dejen algunas tags así como
+							// en filtros, seria de mucha ayuda... Att Eroz.
+				))} 
 			</div>
 		</aside>
 	);

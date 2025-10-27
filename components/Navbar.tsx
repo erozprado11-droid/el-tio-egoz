@@ -145,6 +145,41 @@ function Navbar() {
 						&times;
 					</button>
 					<ul className='space-y-4 mt-10'>
+						<li>
+							<Link
+								href='/'
+								className='hover:underline'
+							>
+								Inicio
+							</Link>
+						</li>
+						<li>
+							<Link
+								href='/Donate'
+								className='hover:underline'
+								rel='noopener noreferrer'
+							>
+								Donar
+							</Link>
+						</li>
+						<li>
+							<a
+								href='/social-networks'
+								rel='noopener noreferrer'
+								className='hover:underline'
+							>
+								Redes
+							</a>
+						</li>
+						<li>
+							<Link
+								href='/contact'
+								className='hover:underline'
+								rel='noopener noreferrer'
+							>
+								Contáctanos
+							</Link>
+						</li>
 						{navLinks.map((link, idx) =>
 							link.external ? (
 								<a
