@@ -43,7 +43,7 @@ export default function Home() {
 				</button>
 			</div>
 			<div className='flex flex-col lg:flex-row gap-4 w-full'>
-				{/* Filtros: ocultos en móvil si showFilters es false, siempre visibles en escritorio */}
+				{/* Filtros: ocultos en móvil si showFilters es false... siempre visibles en escritorio */}
 				<div
 					className={`w-full lg:w-auto ${showFilters ? '' : 'hidden'} lg:block`}
 				>
