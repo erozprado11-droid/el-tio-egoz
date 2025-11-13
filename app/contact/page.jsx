@@ -77,7 +77,7 @@ const CustomerServiceCard = () => {
           {/* Horario de Atención */}
           <p className="flex items-center font-semibold text-gray-700">
             <Clock className="w-5 h-5 mr-2 text-blue-500" />
-            Estoy está disponible de Todos los Días, de **9:00 AM a 6:00 PM** (GMT-5:30) Hora Venezuela.
+            Estoy disponible de Todos los Días.
           </p>
         </div>
       </div>

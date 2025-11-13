@@ -31,7 +31,7 @@ const socialLinks = [
     icon: MonitorPlay, // Usamos MonitorPlay como un sustituto visual para Kick
   },
   {
-    name: "Servidor de Discord",
+    name: "Servidor en Discord",
     url: "https://discord.gg/n2dSP7phY5", // Reemplaza con la URL real de Kick
     color: "bg-blue-500 hover:bg-blue-800",
     icon: MonitorPlay, // Usamos MonitorPlay como un sustituto visual para Kick
@@ -93,7 +93,7 @@ const SocialLinksCard = () => {
           
           {/* Título */}
           <h1 className="text-3xl font-extrabold text-gray-900 leading-tight">
-            Enlaces del Tío Egoz
+            Enlaces del Tio Egoz
           </h1>
         </div>
 

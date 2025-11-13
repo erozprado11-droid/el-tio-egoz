@@ -63,7 +63,7 @@ const DonatePage = () => {
                 description="Apoya nuestro contenido de forma segura y sencilla a través de PayPal. Cualquier contribución es bienvenida."
                 // Este es un enlace EXTERNO (empieza con https), por lo que se abrirá en una nueva pestaña (según la lógica del componente DonationBlock).
                 buttonLink="https://www.paypal.com/paypalme/ElTioEGoz?v=1&utm_source=unp&utm_medium=email&utm_campaign=RT000481&utm_unptid=078c1128-a23d-11f0-93aa-b93a2f169a17&ppid=RT000481&cnac=VE&rsta=es_XC%28es-VE%29&cust=L5GRQ8BRWCGUY&unptid=078c1128-a23d-11f0-93aa-b93a2f169a17&calc=f612303ddf518&unp_tpcid=ppme-social-business-profile-created&page=main%3Aemail%3ART000481&pgrp=main%3Aemail&e=cl&mchn=em&s=ci&mail=sys&appVersion=1.361.0&tenant_name=PAYPAL&xt=145585%2C154413%2C104038&link_ref=paypalme_eltioegoz" 
-                buttonText="Donar en PayPal"
+                buttonText="Donar con PayPal"
             />
 
         {/* Bloque de Donación para Binance */}
@@ -73,7 +73,7 @@ const DonatePage = () => {
                 description="Realiza tus donaciones en criptomonedas (USDT, BTC, etc.) usando Binance Pay. ¡Es rápido, fácil y sin comisiones de red!"
                 // Este es un enlace INTERNO (/Donate/binance), por lo que se abrirá en la MISMA pestaña (según la lógica del componente DonationBlock).
                 buttonLink="/Donate/binance" 
-                buttonText="Donar en Binance"
+                buttonText="Donar con Binance"
             />
       </div>
 

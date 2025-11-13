@@ -50,7 +50,7 @@ const BinanceInstructionsPage = () => {
                 href="/Donate" // Vuelve a la página principal de donaciones
                 className="mt-6 text-blue-600 dark:text-blue-400 hover:underline font-medium"
             >
-                ← Volver a Métodos de Donación
+                ← Volver a Donación
             </a>
 
         </div>
