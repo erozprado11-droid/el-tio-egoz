@@ -1,180 +1,166 @@
 'use client';
 
 import { useState } from 'react';
-// import Image from 'next/image';   // Reemplazado por <img>
-// import Link from 'next/link';     // Reemplazado por <a>
-// import { useSearch } from '@/context/SearchContext'; // Reemplazado por useState local
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSearch } from '@/context/SearchContext';
 
 // Reemplazado: navLinks con propiedad `external` explicitada y uso único en todo el componente
 const navLinks = [
-    { label: 'Inicio', href: '/' },
-    { label: 'Donar', href: '/Donate' },
-    { label: 'Redes', href: '/social-networks', external: false },
-    { label: 'Contáctanos', href: '/contact' },
+	{ label: 'Inicio', href: '/', external: false },
+	{ label: 'Donar', href: '/Donate', external: false },
+	{ label: 'Redes', href: '/social-networks', external: false },
+	{ label: 'Contáctanos', href: '/contact', external: false },
 ];
 
 function Navbar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // Nota: 'useSearch' fue reemplazado por 'useState' local para permitir la compilación.
-    // La funcionalidad de búsqueda solo funcionará a nivel de componente aquí.
-    const [query, setQuery] = useState(''); 
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const { query, setQuery } = useSearch();
 
-    // Toggle menu visibility on small screens
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+	const toggleMenu = () => setIsMenuOpen((v) => !v);
+	const closeMenu = () => setIsMenuOpen(false);
 
-    // Close menu when clicking outside of it
-    const closeMenu = () => {
-        setIsMenuOpen(false);
-    };
+	return (
+		<div className='w-full bg-card'>
+			<nav className='flex flex-row justify-between items-center px-4 py-2'>
+				<div>
+					<Link
+						href='/'
+						className='flex items-center gap-2 text-white'
+					>
+						<Image
+							src='/images/logo.webp'
+							alt='logo el tio egoz'
+							width={40}
+							height={40}
+							className='rounded-full sm:w-10 sm:h-10 w-8 h-8'
+						/>
+						<span className='sm:text-2xl text-lg font-semibold'>
+							<span className='sm:inline hidden text-nowrap'>El Tío Egoz</span>
+						</span>
+					</Link>
+				</div>
 
-    return (
-        <div className='w-full bg-card'>
-            <nav className='flex flex-row justify-between items-center px-4 py-2'>
-                <div className=''>
-                    <a // Usamos <a> en lugar de <Link>
-                        href='/'
-                        className='flex items-center gap-2 text-white'
-                    >
-                        <img // Usamos <img> en lugar de <Image>
-                            src='/images/logo.webp'
-                            alt='logo el tio egoz'
-                            className='rounded-full sm:w-10 sm:h-10 w-8 h-8'
-                            style={{ width: '40px', height: '40px' }} // Mantener tamaño explícito
-                        />
-                        <span className='sm:text-2xl text-lg font-semibold'>
-                            <span className='sm:inline hidden text-nowrap'>El Tío Egoz</span>
-                            <span className='inline sm:hidden text-nowrap'>Tío Egoz</span>
-                        </span>
-                    </a>
-                </div>
+				{/* Search bar */}
+				<div className='flex items-center justify-center flex-1 mx-2'>
+					<div className='relative w-full max-w-xs sm:max-w-sm'>
+						<input
+							type='text'
+							placeholder='Buscar juegos...'
+							value={query}
+							onChange={(e) => setQuery(e.target.value)}
+							className='w-full pl-10 pr-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm sm:text-base text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white dark:focus:bg-gray-900 transition duration-200 shadow-sm'
+						/>
+						<span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none'>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								fill='none'
+								viewBox='0 0 24 24'
+								strokeWidth={2}
+								stroke='currentColor'
+								className='w-5 h-5'
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									d='M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z'
+								/>
+							</svg>
+						</span>
+					</div>
+				</div>
 
-                {/* Search bar */}
-                <div className='flex items-center justify-center flex-1 mx-2'>
-                    <div className='relative w-full max-w-xs sm:max-w-sm'>
-                        <input
-                            type='text'
-                            placeholder='Buscar juegos...'
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            className='w-full pl-10 pr-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm sm:text-base text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white dark:focus:bg-gray-900 transition duration-200 shadow-sm'
-                        />
-                        <span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none'>
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill='none'
-                                viewBox='0 0 24 24'
-                                strokeWidth={2}
-                                stroke='currentColor'
-                                className='w-5 h-5'
-                            >
-                                <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    d='M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z'
-                                />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
+				{/* Menú horizontal en desktop */}
+				<ul className='hidden lg:flex flex-row gap-6 items-center text-white ml-4'>
+					{navLinks.map((link, idx) => (
+						<li key={idx}>
+							{link.external ? (
+								<a
+									href={link.href}
+									target='_blank'
+									rel='noopener noreferrer'
+									className='hover:underline'
+								>
+									{link.label}
+								</a>
+							) : (
+								<Link
+									href={link.href}
+									className='hover:underline'
+								>
+									{link.label}
+								</Link>
+							)}
+						</li>
+					))}
+				</ul>
 
-                {/* Menú horizontal en desktop */}
-                <ul className='hidden lg:flex flex-row gap-6 items-center text-white ml-4'>
-                    {navLinks.map((link, idx) =>
-                        link.external ? (
-                            <a
-                                key={idx}
-                                href={link.href}
-                                rel='noopener noreferrer'
-                                className='hover:underline'
-                            >
-                                {link.label}
-                            </a>
-                        ) : (
-                            <li key={idx}>
-                                <a // Usamos <a> en lugar de <Link>
-                                    href={link.href}
-                                    className='hover:underline'
-                                >
-                                    {link.label}
-                                </a>
-                            </li>
-                        )
-                    )}
-                </ul>
+				{/* Toggle menu button for mobile */}
+				<button
+					className='lg:hidden text-white p-2'
+					onClick={toggleMenu}
+					aria-label='Abrir menú'
+				>
+					<span className='block w-6 h-0.5 bg-white mb-2'></span>
+					<span className='block w-6 h-0.5 bg-white mb-2'></span>
+					<span className='block w-6 h-0.5 bg-white'></span>
+				</button>
+			</nav>
 
-                {/* Toggle menu button for mobile */}
-                <button
-                    className='lg:hidden text-white p-2'
-                    onClick={toggleMenu}
-                    aria-label='Abrir menú'
-                >
-                    <span className='block w-6 h-0.5 bg-white mb-2'></span>
-                    <span className='block w-6 h-0.5 bg-white mb-2'></span>
-                    <span className='block w-6 h-0.5 bg-white'></span>
-                </button>
-            </nav>
+			{/* Sidebar Menu for Mobile */}
+			<div
+				className={`fixed inset-0 z-50 transition-all duration-300 ${isMenuOpen ? 'block' : 'hidden'}`}
+				style={{ pointerEvents: isMenuOpen ? 'auto' : 'none' }}
+			>
+				{/* Fondo oscuro */}
+				<div
+					className='absolute inset-0 transition-opacity duration-300'
+					style={{ background: 'rgba(0,0,0,0.5)' }}
+					onClick={closeMenu}
+				/>
+				{/* Sidebar */}
+				<aside
+					className={`fixed left-0 top-0 w-64 h-full bg-card text-white p-4 z-50 transform transition-transform duration-300 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+					style={{ boxShadow: '2px 0 8px rgba(0,0,0,0.2)' }}
+				>
+					{/* Botón de cerrar */}
+					<button
+						className='absolute top-4 right-4 text-white text-2xl'
+						onClick={closeMenu}
+						aria-label='Cerrar menú'
+					>
+						&times;
+					</button>
 
-            {/* Sidebar Menu for Mobile */}
-            {/* Overlay */}
-            <div
-                className={`fixed inset-0 z-50 transition-all duration-300 ${
-                    isMenuOpen ? 'block' : 'hidden'
-                }`}
-                style={{ pointerEvents: isMenuOpen ? 'auto' : 'none' }}
-            >
-                {/* Fondo oscuro */}
-                <div
-                    className='absolute inset-0 transition-opacity duration-300'
-                    style={{ background: 'rgba(0,0,0,0.5)' }}
-                    onClick={closeMenu}
-                />
-                {/* Sidebar */}
-                <aside
-                    className={`fixed left-0 top-0 w-64 h-full bg-card text-white p-4 z-50 transform transition-transform duration-300 ${
-                        isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-                    }`}
-                    style={{ boxShadow: '2px 0 8px rgba(0,0,0,0.2)' }}
-                >
-                    {/* Botón de cerrar */}
-                    <button
-                        className='absolute top-4 right-4 text-white text-2xl'
-                        onClick={closeMenu}
-                        aria-label='Cerrar menú'
-                    >
-                        &times;
-                    </button>
-                    {/* ÚNICA LISTA DE ENLACES MÓVILES */}
-                    <ul className='space-y-4 mt-10'>
-                        {/* Iteramos SOLO sobre el array navLinks */}
-                        {navLinks.map((link, idx) => (
-                            <li key={idx}>
-                                {link.external ? (
-                                    <a
-                                        href={link.href}
-                                        rel='noopener noreferrer'
-                                        className='hover:underline block'
-                                        onClick={closeMenu} // Cierra el menú al hacer clic
-                                    >
-                                        {link.label}
-                                    </a>
-                                ) : (
-                                    <a // Usamos <a> en lugar de <Link>
-                                        href={link.href}
-                                        className='hover:underline block'
-                                        onClick={closeMenu} // Cierra el menú al hacer clic
-                                    >
-                                        {link.label}
-                                    </a>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                </aside>
-            </div>
-        </div>
-    );
+					<ul className='space-y-4 mt-10'>
+						{navLinks.map((link, idx) => (
+							<li key={idx}>
+								{link.external ? (
+									<a
+										href={link.href}
+										target='_blank'
+										rel='noopener noreferrer'
+										className='hover:underline block'
+										onClick={closeMenu}
+									>
+										{link.label}
+									</a>
+								) : (
+									<Link
+										href={link.href}
+										className='hover:underline block'
+										onClick={closeMenu}
+									>
+										{link.label}
+									</Link>
+								)}
+							</li>
+						))}
+					</ul>
+				</aside>
+			</div>
+		</div>
+	);
 }
 
 export default Navbar;
