@@ -5,7 +5,7 @@ import { useState } from 'react';
 // import Link from 'next/link';     // Reemplazado por <a>
 // import { useSearch } from '@/context/SearchContext'; // Reemplazado por useState local
 
-// Array único de enlaces para navbar y sidebar
+// Reemplazado: navLinks con propiedad `external` explicitada y uso único en todo el componente
 const navLinks = [
     { label: 'Inicio', href: '/' },
     { label: 'Donar', href: '/Donate' },
