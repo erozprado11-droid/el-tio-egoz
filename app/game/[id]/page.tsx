@@ -48,7 +48,7 @@ const GameDetails = () => {
 				</p>
 				<hr className='my-4 border-t border-gray-200 dark:border-gray-700' />
 				<h2 className='text-xl font-bold text-heading mb-2'>
-					Detalles del juego
+					Detalles del juego sabroso
 				</h2>
 				{/* Informacion Básica */}
 				{item.basicInformation && (
