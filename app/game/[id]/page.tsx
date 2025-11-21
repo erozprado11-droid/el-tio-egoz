@@ -28,7 +28,7 @@ const GameDetails = () => {
 		if (id) fetchItem();
 	}, [id]);
 
-	if (loading) return <p className='mx-auto text-center'>Cargando...</p>;
+	if (loading) return <p className='mx-auto text-center'>Cargando juego por favor espere...</p>;
 	if (!item) return <p className='mx-auto text-center'>Juego no encontrado.</p>;
 
 	return (

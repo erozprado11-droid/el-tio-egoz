@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearch } from '@/context/SearchContext';
 
-// Reemplazado: navLinks con propiedad `external` explicitada y uso único en todo el componente
+// TU CODIGO ME LA PELÓ xd
 const navLinks = [
 	{ label: 'Inicio', href: '/', external: false },
 	{ label: 'Donar', href: '/Donate', external: false },

@@ -16,13 +16,21 @@ const platforms = ['Windows', 'Android'];
 // Tags fijas (sin cambios)
 const sampleTags = [
 	'2D',
-	'Romance',
-	'Aventura',
-	'Acción',
-	'RPG',
-	'Estrategia',
-	'Indie',
+	'3D',
+	'3DCG',
+	'2DCG',
+	'NTR',
+	'Vanilla',
+    'Romance',
+    'Acción',
+    'Animación',
+    'NeToRi',
+	'Loli',
+    'MILF',
 	'Simulación',
+    'Corrupción',
+    'Fantasia',
+    'Oscura',
 ];
 
 // DEFINICIÓN DE TIPOS ACTUALIZADA

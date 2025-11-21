@@ -186,7 +186,7 @@ export default function Dashboard({ filters }: { filters: { order: string, tags:
     };
 
 
-    if (loading) return <p className='mx-auto text-center'>Cargando lujurias... ❤</p>;
+    if (loading) return <p className='mx-auto text-center'>Cargando lujurias... Mmm❤</p>;
     if (filteredGames.length === 0) return <p className='mx-auto text-center'>No se encontraron publicaciones.</p>;
 
     return (
