@@ -2,7 +2,6 @@ import React from 'react';
 // Corrección: El ícono 'TikTok' no existe en lucide-react. 
 // Usaremos 'MessageSquarePlus' o 'SquareDashedKanban' como alternativa visual.
 import { Send, Youtube, MonitorPlay, MessageSquarePlus } from 'lucide-react';
-
 // Datos de los enlaces.
 // 'color' usa las clases de Tailwind que definen el color de fondo.
 // 'icon' utiliza los componentes de iconos de lucide-react.
@@ -31,6 +30,14 @@ const socialLinks = [
     color: "bg-lime-500 hover:bg-lime-600",
     icon: MonitorPlay, // Usamos MonitorPlay como un sustituto visual para Kick
   },
+  {
+    name: "Servidor en Discord",
+    url: "https://discord.gg/n2dSP7phY5", // Reemplaza con la URL real de Kick
+    color: "bg-blue-500 hover:bg-blue-800",
+    icon: MonitorPlay, // Usamos MonitorPlay como un sustituto visual para Kick
+  },
+
+
 ];
 
 /**
@@ -86,7 +93,7 @@ const SocialLinksCard = () => {
           
           {/* Título */}
           <h1 className="text-3xl font-extrabold text-gray-900 leading-tight">
-            Enlaces del Tío Egoz
+            Enlaces del Tio Egoz
           </h1>
         </div>
 

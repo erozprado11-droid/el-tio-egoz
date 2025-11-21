@@ -16,9 +16,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: 'El tío Egoz',
+	title: {
+		default: 'El tío Egoz',
+		template: '%s | El tío Egoz',
+	},
 	description:
 		'Descubre y descarga los juegos más atrevidos e intensos para PC y Android. Actualizaciones frecuentes, comunidad activa y contenido sin filtros en El tío Egoz.',
+	verification: {
+		google: '2bdZM6yI2s7nsaWXWA7lY6nMRV90dPcGImdgJxaIsQQ',
+	},
 };
 
 export default function RootLayout({

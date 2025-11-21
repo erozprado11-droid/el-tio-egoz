@@ -1,14 +1,43 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Dashboard from '@/components/Dashboard';
 import Hero from '@/components/Hero';
-import SidebarFilters from '@/components/SidebarFilters';
+import SidebarFilters, { Filters } from '@/components/SidebarFilters'; // <-- IMPORTAR 'Filters'
+
+interface FilterState { // Definimos el tipo completo
+    order: string;
+    tags: string[];
+    platforms: string[];
+}
 
 export default function Home() {
-	const [filters, setFilters] = useState<{ order: string }>({
-		order: 'newest',
-	});
+    // Usar Filters importado
+    const [filters, setFilters] = useState<Filters>({
+        order: 'newest',
+        tags: [],        // Inicializar con arrays vacíos
+        platforms: [],   // Inicializar con arrays vacíos
+    });
 	const [showFilters, setShowFilters] = useState(false);
+	const currentBuildId = useRef<string | null>(null);
+
+	useEffect(() => {
+		async function checkVersion() {
+			try {
+				const res = await fetch('/api/version');
+				const { buildId } = await res.json();
+				if (!currentBuildId.current) {
+					currentBuildId.current = buildId;
+				} else if (currentBuildId.current !== buildId) {
+					// Nueva versión detectada, recarga la página
+					window.location.reload();
+				}
+			} catch {
+				// Ignorar errores de red
+			}
+		}
+		const interval = setInterval(checkVersion, 60000); // cada 60 segundos
+		return () => clearInterval(interval);
+	}, []);
 
 	return (
 		<div className='flex flex-col'>
@@ -23,7 +52,7 @@ export default function Home() {
 				</button>
 			</div>
 			<div className='flex flex-col lg:flex-row gap-4 w-full'>
-				{/* Filtros: ocultos en móvil si showFilters es false, siempre visibles en escritorio */}
+				{/* Filtros: ocultos en móvil si showFilters es false, siempre visibles en escritorio*/}
 				<div
 					className={`w-full lg:w-auto ${showFilters ? '' : 'hidden'} lg:block`}
 				>

@@ -5,24 +5,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearch } from '@/context/SearchContext';
 
+// TU CODIGO ME LA PELÓ xd
+const navLinks = [
+	{ label: 'Inicio', href: '/', external: false },
+	{ label: 'Donar', href: '/Donate', external: false },
+	{ label: 'Redes', href: '/social-networks', external: false },
+	{ label: 'Contáctanos', href: '/contact', external: false },
+];
+
 function Navbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const { query, setQuery } = useSearch();
 
-	// Toggle menu visibility on small screens
-	const toggleMenu = () => {
-		setIsMenuOpen(!isMenuOpen);
-	};
-
-	// Close menu when clicking outside of it
-	const closeMenu = () => {
-		setIsMenuOpen(false);
-	};
+	const toggleMenu = () => setIsMenuOpen((v) => !v);
+	const closeMenu = () => setIsMenuOpen(false);
 
 	return (
 		<div className='w-full bg-card'>
 			<nav className='flex flex-row justify-between items-center px-4 py-2'>
-				<div className=''>
+				<div>
 					<Link
 						href='/'
 						className='flex items-center gap-2 text-white'
@@ -30,13 +31,12 @@ function Navbar() {
 						<Image
 							src='/images/logo.webp'
 							alt='logo el tio egoz'
-							width={40} // tamaño base reducido
+							width={40}
 							height={40}
 							className='rounded-full sm:w-10 sm:h-10 w-8 h-8'
 						/>
 						<span className='sm:text-2xl text-lg font-semibold'>
 							<span className='sm:inline hidden text-nowrap'>El Tío Egoz</span>
-							<span className='inline sm:hidden text-nowrap'>Tío Egoz</span>
 						</span>
 					</Link>
 				</div>
@@ -72,39 +72,27 @@ function Navbar() {
 
 				{/* Menú horizontal en desktop */}
 				<ul className='hidden lg:flex flex-row gap-6 items-center text-white ml-4'>
-					<li>
-						<Link
-							href='/'
-							className='hover:underline'
-						>
-							Inicio
-						</Link>
-					</li>
-					<li>
-						<Link
-							href='#'
-							className='hover:underline'
-						>
-							Ayuda
-						</Link>
-					</li>
-					<li>
-						<a
-							href='/social-networks'
-							rel='noopener noreferrer'
-							className='hover:underline'
-						>
-							Redes
-						</a>
-					</li>
-					<li>
-						<Link
-							href='/contact'
-							className='hover:underline'
-						>
-							Contáctanos
-						</Link>
-					</li>
+					{navLinks.map((link, idx) => (
+						<li key={idx}>
+							{link.external ? (
+								<a
+									href={link.href}
+									target='_blank'
+									rel='noopener noreferrer'
+									className='hover:underline'
+								>
+									{link.label}
+								</a>
+							) : (
+								<Link
+									href={link.href}
+									className='hover:underline'
+								>
+									{link.label}
+								</Link>
+							)}
+						</li>
+					))}
 				</ul>
 
 				{/* Toggle menu button for mobile */}
@@ -120,11 +108,8 @@ function Navbar() {
 			</nav>
 
 			{/* Sidebar Menu for Mobile */}
-			{/* Overlay */}
 			<div
-				className={`fixed inset-0 z-50 transition-all duration-300 ${
-					isMenuOpen ? 'block' : 'hidden'
-				}`}
+				className={`fixed inset-0 z-50 transition-all duration-300 ${isMenuOpen ? 'block' : 'hidden'}`}
 				style={{ pointerEvents: isMenuOpen ? 'auto' : 'none' }}
 			>
 				{/* Fondo oscuro */}
@@ -135,9 +120,7 @@ function Navbar() {
 				/>
 				{/* Sidebar */}
 				<aside
-					className={`fixed left-0 top-0 w-64 h-full bg-card text-white p-4 z-50 transform transition-transform duration-300 ${
-						isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-					}`}
+					className={`fixed left-0 top-0 w-64 h-full bg-card text-white p-4 z-50 transform transition-transform duration-300 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
 					style={{ boxShadow: '2px 0 8px rgba(0,0,0,0.2)' }}
 				>
 					{/* Botón de cerrar */}
@@ -148,41 +131,31 @@ function Navbar() {
 					>
 						&times;
 					</button>
+
 					<ul className='space-y-4 mt-10'>
-						<li>
-							<Link
-								href='/'
-								className='hover:underline'
-							>
-								Inicio
-							</Link>
-						</li>
-						<li>
-							<Link
-								href='#'
-								className='hover:underline'
-							>
-								Nosotros
-							</Link>
-						</li>
-						<li>
-							<a
-								href='https://directorio-de-enlaces-nuevo-v3.netlify.app/'
-								target='_blank'
-								rel='noopener noreferrer'
-								className='hover:underline'
-							>
-								Redes
-							</a>
-						</li>
-						<li>
-							<Link
-								href='#'
-								className='hover:underline'
-							>
-								Contáctanos
-							</Link>
-						</li>
+						{navLinks.map((link, idx) => (
+							<li key={idx}>
+								{link.external ? (
+									<a
+										href={link.href}
+										target='_blank'
+										rel='noopener noreferrer'
+										className='hover:underline block'
+										onClick={closeMenu}
+									>
+										{link.label}
+									</a>
+								) : (
+									<Link
+										href={link.href}
+										className='hover:underline block'
+										onClick={closeMenu}
+									>
+										{link.label}
+									</Link>
+								)}
+							</li>
+						))}
 					</ul>
 				</aside>
 			</div>
