@@ -6,6 +6,12 @@ import { useSearch } from '@/context/SearchContext';
 import Link from 'next/link';
 import { Item } from '@/types';
 
+interface Filters {
+    order: string;
+    tags: string[];
+    platforms: string[];
+}
+
 const ITEMS_PER_PAGE = 12;
 
 // Función para ordenar el array de manera aleatoria (shuffle)

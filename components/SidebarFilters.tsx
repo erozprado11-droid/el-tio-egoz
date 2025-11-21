@@ -34,7 +34,7 @@ const sampleTags = [
 ];
 
 // DEFINICIÓN DE TIPOS ACTUALIZADA
-interface Filters {
+export interface Filters {
     order: string;
     tags: string[];
     platforms: string[]; // NUEVO: Campo para plataformas

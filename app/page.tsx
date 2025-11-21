@@ -2,12 +2,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Dashboard from '@/components/Dashboard';
 import Hero from '@/components/Hero';
-import SidebarFilters from '@/components/SidebarFilters';
+import SidebarFilters, { Filters } from '@/components/SidebarFilters'; // <-- IMPORTAR 'Filters'
+
+interface FilterState { // Definimos el tipo completo
+    order: string;
+    tags: string[];
+    platforms: string[];
+}
 
 export default function Home() {
-	const [filters, setFilters] = useState<{ order: string }>({
-		order: 'newest',
-	});
+    // Usar Filters importado
+    const [filters, setFilters] = useState<Filters>({
+        order: 'newest',
+        tags: [],        // Inicializar con arrays vacíos
+        platforms: [],   // Inicializar con arrays vacíos
+    });
 	const [showFilters, setShowFilters] = useState(false);
 	const currentBuildId = useRef<string | null>(null);
 
